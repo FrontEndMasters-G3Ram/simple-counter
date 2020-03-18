@@ -4,10 +4,16 @@ import { render } from 'react-dom';
 import './styles.scss';
 
 class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 3,
+    };
+  }
   render() {
     return (
       <main className="Counter">
-        <p className="count">0</p>
+        <p className="count">{this.state.count}</p>
         <section className="controls">
           <button>Increment</button>
           <button>Decrement</button>
