@@ -16,7 +16,12 @@ class Counter extends Component {
   }
 
   increment() {
-    this.setState({ count: this.state.count + 1 });
+    this.setState(state => {
+      if (state.count >= 5) {
+        return;
+      }
+      return { count: state.count + 1 };
+    });
   }
 
   decrement() {
