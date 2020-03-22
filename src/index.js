@@ -46,4 +46,4 @@ class Counter extends Component {
   }
 }
 
-render(<Counter />, document.getElementById('root'));
+render(<Counter max={15} step={5} />, document.getElementById('root'));
