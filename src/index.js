@@ -22,8 +22,14 @@ class Counter extends Component {
     this.reset = this.reset.bind(this);
   }
 
+  // this.setState (function1, function2);
+  // function1 is called before the state is updated
+  // function2 is a call back function which is called after the state is updated
   increment() {
-    this.setState(increment);
+    this.setState(increment, () => {
+      console.log('AFTER:: Value of count in state is ' + this.state.count);
+    });
+    console.log('BEFORE:: Value of count in state is ' + this.state.count);
   }
 
   decrement() {
