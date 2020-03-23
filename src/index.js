@@ -3,6 +3,17 @@ import { render } from 'react-dom';
 
 import './styles.scss';
 
+const getStateFromStorage = () => {
+  const storage = localStorage.getItem('counterState');
+  if (storage) return JSON.parse(storage);
+  return { count: 0 };
+};
+
+function storeStateIntoLocalStorage(state) {
+  localStorage.setItem('counterState', JSON.stringify(state.count));
+  console.log('AFTER:: Value of count in state is ' + state.count);
+}
+
 const increment = (state, props) => {
   const { max, step } = props;
   if (state.count >= max) {
@@ -13,9 +24,7 @@ const increment = (state, props) => {
 class Counter extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      count: 0,
-    };
+    this.state = getStateFromStorage();
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -27,7 +36,7 @@ class Counter extends Component {
   // function2 is a call back function which is called after the state is updated
   increment() {
     this.setState(increment, () => {
-      console.log('AFTER:: Value of count in state is ' + this.state.count);
+      storeStateIntoLocalStorage(this.state);
     });
     console.log('BEFORE:: Value of count in state is ' + this.state.count);
   }
